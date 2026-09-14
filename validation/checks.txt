@@ -1,0 +1,10 @@
+== python check_names.py
+195 names, 0 spelled more than one way
+0 sentences spell a name differently from the name entry
+== python lint_korean.py
+5569 lines read, 0 faults
+== python check_script_fit.py
+348 translations checked, 0 problems
+== python check_pack_fit.py
+91 members translated, 0 over their slot
+work list: itp_work/todo/pack_over.json

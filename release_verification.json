@@ -1,0 +1,15 @@
+{
+  "release": "v1.0.0",
+  "game": "Vantage Master Portable (PSP, ULJM05332, v1.01)",
+  "source_bytes": 612728832,
+  "source_md5": "5b4355c58f0dd9e0091ba17dda8783c6",
+  "source_sha256": "76df5a15c4441b8c738bb97b850ef2feba28b7582e96c22a3c51d489a929bfbc",
+  "patch_file": "VMP_Korean_v1.0.0.xdelta",
+  "patch_bytes": 7216766,
+  "patch_sha256": "069572210bcfa7105a9cb52f3a93b25ecd470f1955598461eb5a83ffaf252470",
+  "output_bytes": 612728832,
+  "output_sha256": "dcfb4ca92cd2eed5784ba25c11576a6646030d63fb04cf847fc5b116f4e76a54",
+  "roundtrip_byte_identical": true,
+  "emulator_executed_for_this_release": false,
+  "date": "2026-09-14"
+}

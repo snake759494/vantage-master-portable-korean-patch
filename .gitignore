@@ -1,0 +1,70 @@
+# Allow-list.  The working directory also holds the original and patched ISOs,
+# the extracted game files, every texture dump and the TTF fonts; nothing is
+# published unless it is named below.
+*
+!/.gitignore
+!/README.md
+!/RIGHTS.md
+!/RELEASE_NOTES.md
+!/CHANGELOG.md
+!/release_verification.json
+!/publication_manifest.json
+
+# Pipeline sources (the _*.py files are one-off probes and stay out)
+!/*.py
+/_*.py
+
+!/docs/
+/docs/*
+!/docs/*.md
+
+!/tools/
+/tools/*
+!/tools/*.py
+
+!/validation/
+/validation/*
+!/validation/*.txt
+
+# Translation data and the text census it was made from
+!/itp_work/
+/itp_work/*
+!/itp_work/kr/
+/itp_work/kr/*
+!/itp_work/kr/*.json
+!/itp_work/kr_scripts/
+/itp_work/kr_scripts/*
+!/itp_work/kr_scripts/*.json
+!/itp_work/event_kr/
+/itp_work/event_kr/*
+!/itp_work/event_kr/*.json
+!/itp_work/todo/
+/itp_work/todo/*
+!/itp_work/todo/*.json
+!/itp_work/todo/GLOSSARY.md
+!/itp_work/event_todo.json
+!/itp_work/exe_todo.json
+!/itp_work/exe_left.json
+!/itp_work/exe_missed.json
+!/itp_work/as_left.json
+!/itp_work/over.json
+!/itp_work/existing_pairs.txt
+
+# Which font slot carries which syllable (the patched font itself is game data)
+!/korean_font_slotmapped/
+/korean_font_slotmapped/*
+!/korean_font_slotmapped/korean_slot_map.csv
+
+# Build report of the released ISO
+!/korean_opening_build/
+/korean_opening_build/*
+!/korean_opening_build/opening_patch_report.txt
+!/korean_opening_build/map_names_review.txt
+!/korean_opening_build/system_text_review.txt
+
+# Layout of the original kanji font (no glyph images)
+!/font_extraction/
+/font_extraction/*
+!/font_extraction/README.txt
+!/font_extraction/japanese_kanji_map.csv
+/validation/_*.txt
