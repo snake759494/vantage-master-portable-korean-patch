@@ -1,0 +1,11 @@
+ISO size equal: 612728832 bytes
+BOOT.BIN length equal: True
+int32 -1 sentinels intact: True
+float constants intact: True
+same data/system file set: True
+textures whose length changed: none
+textures changed: 192  battle.itp x1, common.itp x1, cursor.itp x1, galle x108, histor x28, info x4, make_ x4, manual x39, network.itp x1, rank.itp x1, result x2, sysmenu.itp x1, title.itp x1
+changed textures that no longer decode: none
+asm.dat: 449 members, none moved, all decompress
+init0.dat: 91 members, none moved, all decompress
+OK

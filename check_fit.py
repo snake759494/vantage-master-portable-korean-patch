@@ -34,7 +34,7 @@ from pathlib import Path
 from falcom_font import FalcomFont
 from korean_slots import build_slot_map, make_encoder
 
-FONT = Path("font_debug/pspfont_orig_from_pack.dat")
+FONT = Path("pspfont.dat")
 
 
 def encoder():

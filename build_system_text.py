@@ -65,7 +65,7 @@ def main() -> None:
         for key, value in json.loads(path.read_text(encoding="utf-8")).items():
             korean[int(str(key), 0)] = value
 
-    font = FalcomFont(Path("font_debug/pspfont_orig_from_pack.dat").read_bytes())
+    font = FalcomFont(Path("pspfont.dat").read_bytes())
     encode = make_encoder(build_slot_map(font))
     lines: list[str] = []
     skipped: list[tuple[int, str]] = []

@@ -309,7 +309,8 @@ def main() -> None:
     parser.add_argument(
         "--pack",
         type=Path,
-        default=Path("font_debug/Vantage_Master_Portable_PSP/pack/init0.dat"),
+        default=Path("itp_work/init0_orig.dat"),
+        help="data/pack/init0.dat exactly as the original ISO ships it",
     )
     parser.add_argument(
         "--original-loose",
@@ -320,9 +321,9 @@ def main() -> None:
     parser.add_argument(
         "--replacement",
         type=Path,
-        default=Path("korean_font_test/pspfont_korean_2350_test.dat"),
+        default=Path("korean_font_slotmapped/pspfont_korean.dat"),
     )
-    parser.add_argument("--out", type=Path, default=Path("packed_font_test/init0_korean.dat"))
+    parser.add_argument("--out", type=Path, default=Path("korean_font_slotmapped/init0_korean.dat"))
     parser.add_argument("--verify-only", action="store_true")
     args = parser.parse_args()
 

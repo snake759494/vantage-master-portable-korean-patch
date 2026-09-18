@@ -13,19 +13,22 @@
 
 | 경로 | 내용 | 만드는 방법 |
 | --- | --- | --- |
-| `Vantage Master Portable (1.01).iso` | 수정되지 않은 일본판 원본 | 직접 준비 (README의 해시와 일치해야 함) |
-| `pspfont.dat` | 원본 `PSP_GAME/USRDIR/system/pspfont.dat` | ISO에서 추출 |
-| `font_debug/Vantage_Master_Portable_PSP/` | ISO의 `USRDIR`를 통째로 추출한 사본(`pack/`, `system/`, `map/`, `master/`, `table/` …) | ISO 추출 도구 |
-| `font_debug/pspfont_orig_from_pack.dat` | `pack/init0.dat` 안의 압축 글꼴을 풀어낸 사본 | `patch_packed_pspfont.py --verify-only`로 확인 가능 |
+| `Vantage Master Portable (1.01).iso` | 수정되지 않은 일본판 원본. 스크립트·이벤트·갤러리·매뉴얼 원본은 빌드 스크립트가 여기서 직접 읽습니다 | 직접 준비 (README의 해시와 일치해야 함) |
+| `pspfont.dat` | 원본 `PSP_GAME/USRDIR/system/pspfont.dat`. `init0.dat` 안의 압축 사본과 바이트 단위로 같아 인코더도 이 파일로 만듭니다 | ISO에서 추출 |
+| `jis2utf.bin` | 원본 `PSP_GAME/USRDIR/system/jis2utf.bin` (`extract_pspfont.py`만 사용) | ISO에서 추출 |
+| `itp_work/init0_orig.dat` | 원본 `PSP_GAME/USRDIR/data/pack/init0.dat` — `patch_packed_pspfont.py`의 입력 | ISO에서 추출 |
+| `itp_work/asm_orig.dat` | 원본 `data/pack/asm.dat` — `check_pack_fit.py`의 기준 | ISO에서 추출 |
+| `itp_work/BOOT_orig.bin` | 원본 `PSP_GAME/SYSDIR/BOOT.BIN` — `lint_korean.py`가 원문을 읽는 곳 | ISO에서 추출 |
 | `itp_work/raw/*.itp` | 원본 UI·설문 아틀라스 | ISO의 `data/system`에서 추출 |
-| `itp_work/tex/*.itp` | 원본 갤러리·매뉴얼 페이지 | 같음 |
 | `korean_font_slotmapped/pspfont_korean.dat`, `init0_korean.dat` | 한글을 써넣은 글꼴과 그 압축 사본 | 아래 2단계에서 생성 |
 | `itp_work/patched/*.itp` | 한글로 다시 그린 텍스처 | 아래 4단계에서 생성 |
+
+`itp_work/tex/`는 디코드 검사용 임시 파일 자리로, 필요한 스크립트가 알아서 만듭니다. 원본 파일은 반드시 원본 ISO에서 추출하세요 — 다른 번역 프로젝트 저장소에 들어 있는 `init0.dat` 같은 파일은 이미 수정된 것일 수 있습니다.
 
 ## 제작 흐름
 
 1. **추출.** 원본 ISO에서 위 표의 파일을 꺼냅니다. `extract_pspfont.py`는 원본 한자 글꼴의 배치를 조사해 `font_extraction/japanese_kanji_map.csv`를 만듭니다.
-2. **글꼴.** `python build_korean_font.py --font pspfont.dat --ttf NanumSquareNeo-cBd.ttf --out korean_font_slotmapped` → `pspfont_korean.dat`와 `korean_slot_map.csv`. 이어서 `python patch_packed_pspfont.py --pack font_debug/Vantage_Master_Portable_PSP/pack/init0.dat --replacement korean_font_slotmapped/pspfont_korean.dat --out korean_font_slotmapped/init0_korean.dat`. 슬롯 선택과 인코딩은 `korean_slots.py`, 글꼴 레코드 해석은 `falcom_font.py`.
+2. **글꼴.** `python build_korean_font.py --font pspfont.dat --ttf NanumSquareNeo-cBd.ttf --out korean_font_slotmapped` → `pspfont_korean.dat`와 `korean_slot_map.csv`. 이어서 `python patch_packed_pspfont.py` (기본값 `--pack itp_work/init0_orig.dat --replacement korean_font_slotmapped/pspfont_korean.dat --out korean_font_slotmapped/init0_korean.dat`). 슬롯 선택과 인코딩은 `korean_slots.py`, 글꼴 레코드 해석은 `falcom_font.py`.
 3. **실행 파일 문자열.** 원문 목록 `itp_work/exe_todo.json`(오프셋·길이·원문)에 대응하는 번역을 `itp_work/kr/chunk_*.json`(오프셋 → 한국어)에 적습니다. `python build_system_text.py`가 이를 `vmp_system_text.py`로 생성하고, 오프닝 212개 필드는 `vmp_opening_text.py`에 직접 적혀 있습니다. `check_fit.py`가 바이트 예산을 검사합니다.
 4. **텍스처.** ITP 읽기·쓰기는 `falcom_itp.py`. UI 아틀라스는 `python patch_ui_textures.py`(`itp_work/raw` → `itp_work/patched`, 라벨 표는 `ui_texture_text.py`), 설문은 `python patch_quiz_textures.py`(`quiz_text.py`), 갤러리는 `python build_gallery_textures.py`(`gallery_text.py`, 이름은 `vmp_system_text.py`에서), 매뉴얼은 `python build_manual_textures.py`(`manual_text.py`, `manual_pages.py`). 상자 좌표를 다시 재려면 `python refit_ui_boxes.py --write`, 잘린 획 검사는 `python check_ui_labels.py`, 매뉴얼 페이지 검사는 `check_manual_pages.py`.
 5. **이벤트 대사.** `itp_work/event_todo.json`(스크립트별 원문·오프셋·길이)에 대응하는 번역을 `itp_work/event_kr/chunk_*.json`(일본어 → 한국어)에 적습니다. `check_event_fit.py`가 예산을 검사하고, 삽입은 빌드 단계에서 `patch_event_scripts.build()`가 합니다.
@@ -54,6 +57,5 @@
 
 ## 남겨 둔 것과 폐기한 것
 
-- 루트의 `_*.py`(저장소 제외)는 라벨 판정 모델을 만들 때 쓴 일회성 탐침입니다.
-- `build_korean_test_iso.py`, `build_packed_font_test_iso.py`, `apply_korean_font_test.py`, `build_korean_dialogue_mapping_fixed.py`는 글꼴 배치를 찾던 초기 시험 빌드입니다. `patch_map_names.py`는 팩을 제자리에서 늘리던 이전 방식으로, `patch_scripts.py`로 대체되었습니다.
-- `itp_work/`의 PNG·ITP 덤프와 스크린샷, 시험용 ISO는 Git 밖에서 관리합니다. `python tools/audit_public.py`가 Git이 추적하는 파일이 허용된 텍스트 종류뿐인지 검사하고 `publication_manifest.json`을 갱신합니다.
+- `build_korean_test_iso.py`, `build_packed_font_test_iso.py`, `apply_korean_font_test.py`, `build_korean_dialogue_mapping_fixed.py`, `patch_dialogue_text.py`, `pspfont_debug.py`는 글꼴 배치를 찾던 초기 시험 빌드입니다. 출력 폴더는 정리했고 기록용으로만 남겨 둡니다. `patch_map_names.py`는 팩을 제자리에서 늘리던 이전 방식으로, `patch_scripts.py`로 대체되었습니다.
+- 작업 중 만든 PNG 덤프·스크린샷·일회성 탐침 스크립트·시험 빌드는 저장소에 넣지 않았습니다. `python tools/audit_public.py`가 Git이 추적하는 파일이 허용된 텍스트 종류뿐인지 검사하고 `publication_manifest.json`을 갱신합니다.

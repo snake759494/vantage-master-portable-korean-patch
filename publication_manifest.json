@@ -81,18 +81,18 @@
   },
   {
     "path": "build_system_text.py",
-    "bytes": 3802,
-    "sha256": "57728782036404024f7ea58c890f189dfd840eec80ef2010495a0ac965d2b653"
+    "bytes": 3776,
+    "sha256": "2fb4611eece7fc59d6584b8363e2651c36ffc9c58d578955bd9e1fc5821e8400"
   },
   {
     "path": "check_event_fit.py",
-    "bytes": 1739,
-    "sha256": "b8506f730907292c91068a9fa135b7dce13cd65c041bb72c3e045bdc3f1c685d"
+    "bytes": 1713,
+    "sha256": "793d835b802033f27d3fab44bbe22e708c987125374e3ab6602731ce2f71c706"
   },
   {
     "path": "check_fit.py",
-    "bytes": 5816,
-    "sha256": "cf30a9599b12eb3e020becbf8955b58c6a352b3af38b1717fcddd20996c7a412"
+    "bytes": 5790,
+    "sha256": "b38c3c0b6f34cf86d5af138352d1fe62fd836e4ba06b7748ce9c87b7d61b3ab4"
   },
   {
     "path": "check_manual_pages.py",
@@ -126,8 +126,8 @@
   },
   {
     "path": "docs/BUILD.md",
-    "bytes": 7424,
-    "sha256": "912f15dccfb1d6277293698dff558d600423a1d0f2d37dc2099e8c33b0bc8e47"
+    "bytes": 8052,
+    "sha256": "d5791fc65c5e15f6d85c1bfbcdd7ee4b397f35cde03d6a555116140357fe2a8e"
   },
   {
     "path": "docs/FONT_CREDITS.md",
@@ -721,8 +721,8 @@
   },
   {
     "path": "patch_event_scripts.py",
-    "bytes": 6161,
-    "sha256": "c1556a52b58f9199ffff7e62a72a5a866682ef1e07f3ab0a8046469430413a4f"
+    "bytes": 6135,
+    "sha256": "43bd7b596ad2597634a08b0f16b14ed9595af30b18f8b3adf0b82cf807308f6e"
   },
   {
     "path": "patch_gallery_textures.py",
@@ -741,8 +741,8 @@
   },
   {
     "path": "patch_packed_pspfont.py",
-    "bytes": 12278,
-    "sha256": "455232f19b09303ee1c1ec1ec8dde0dff29b4ea37990f85c39b4f26bfc7d24dd"
+    "bytes": 12323,
+    "sha256": "405e34dcaceb5c96b1ce5595667e9440139863c730bb94a69b4c654b4843ab8a"
   },
   {
     "path": "patch_quiz_textures.py",
@@ -811,8 +811,8 @@
   },
   {
     "path": "validation/verify_korean_iso.txt",
-    "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "bytes": 539,
+    "sha256": "b7e5ed1054ecc8b284bebf3c2a9a01da97e587b50a394256ef693a8210a473d6"
   },
   {
     "path": "verify_korean_iso.py",

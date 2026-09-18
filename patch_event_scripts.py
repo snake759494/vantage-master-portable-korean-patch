@@ -149,7 +149,7 @@ if __name__ == "__main__":
     from korean_slots import build_slot_map, make_encoder
 
     encode = make_encoder(
-        build_slot_map(FalcomFont(Path("font_debug/pspfont_orig_from_pack.dat").read_bytes()))
+        build_slot_map(FalcomFont(Path("pspfont.dat").read_bytes()))
     )
     korean = load_korean()
     reps, report, over = build(Path("Vantage Master Portable (1.01).iso"), encode, korean)

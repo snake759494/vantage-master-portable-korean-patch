@@ -16,7 +16,7 @@ from patch_event_scripts import load_korean
 todo = json.loads(Path("itp_work/event_todo.json").read_text(encoding="utf-8"))
 budget = {e["jp"]: e["len"] for rows in todo.values() for e in rows}
 korean = load_korean()
-encode = make_encoder(build_slot_map(FalcomFont(Path("font_debug/pspfont_orig_from_pack.dat").read_bytes())))
+encode = make_encoder(build_slot_map(FalcomFont(Path("pspfont.dat").read_bytes())))
 
 unknown, over, bad = [], [], []
 for japanese, text in sorted(korean.items()):
